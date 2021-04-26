@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerBall : MonoBehaviour
 {
@@ -47,7 +48,8 @@ public class PlayerBall : MonoBehaviour
         {
             itemCount++;
             audio.Play();
-            other.gameObject.SetActive(false) ; 
+            other.gameObject.SetActive(false);
+            manager.GetItem(itemCount);
         }
         //SetActive(bool) : 오브젝트 활성화 함수
         else if (other.tag == "Finish")
@@ -55,10 +57,13 @@ public class PlayerBall : MonoBehaviour
             if ( itemCount == manager.totalItemCount)
             {
                 //Game Clear
+                SceneManager.LoadScene(manager.stage+1);
             }
             else
-            {
-                //Restart
+            {       
+                //Restart 
+                SceneManager.LoadScene(manager.stage);
+                //문자열 뒤에 숫자 넣으면 알아서 문자 처리된다
             }
         }
     }
